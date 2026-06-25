@@ -1,0 +1,27 @@
+Project Name:
+Study Planner Web App
+
+Goal:
+Help students organize study tasks, track deadlines,
+and monitor completed work.
+
+Target Users:
+Students
+
+Platform:
+Web Application
+
+Tech Stack:
+HTML
+CSS
+JavaScript
+Python Flask
+SQLite
+
+Features:
+1. Add Study Task
+2. View Tasks
+3. Mark Task Complete
+4. Delete Task
+5. Set Deadline
+6. Organize by Subject
