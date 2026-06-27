@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Study Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Study Planner</h1>
+
+    <form method="POST">
+        <label>Subject</label>
+        <br>
+        <input
+    type="text"
+    name="subject"
+    placeholder="Enter subject"
+    required>
+        <br><br>
+
+        <label>Task</label>
+        <br>
+        <input
+    type="text"
+    name="task"
+    placeholder="Enter task"
+    required>
+        <br><br>
+
+        <label>Deadline</label>
+        <br>
+        <input
+    type="date"
+    name="deadline"
+    required>
+        <br><br>
+
+        <button type="submit">Add Task</button>
+    </form>
+
+    <hr>
+
+    <h2>Pending Tasks</h2>
+
+    <ul>
+    {% for t in tasks %}
+<li>
+    <strong>{{ t[1] }}</strong> -
+    {{ t[2] }}
+    ({{ t[3] }})
+</li>
+{% endfor %}
+</ul>
+
+    <h2>Completed Tasks</h2>
+
+    <ul>
+        <li>Chemistry Notes</li>
+    </ul>
+
+</body>
+</html>
