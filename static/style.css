@@ -215,13 +215,21 @@ form[method="GET"] button{
     width:160px;
 }
 footer{
-    width: 100%;
-    text-align: center;
-    margin-top: 60px;
-    padding: 20px;
-    color: #F5F5F5;
-    background: #181818;
-    border-top: 2px solid #EC1C24;
-    font-size: 15px;
-    letter-spacing: 1px;
+    margin-top:60px;
+    padding:25px 20px;
+    background:#181818;
+    border-top:2px solid #EC1C24;
+    text-align:center;
+}
+
+footer p{
+    margin:8px 0;
+    color:#d1d5db;
+    font-size:15px;
+    letter-spacing:0.5px;
+}
+
+footer strong{
+    color:#EC1C24;
+    font-size:16px;
 }
