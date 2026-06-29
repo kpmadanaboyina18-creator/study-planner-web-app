@@ -7,6 +7,36 @@
 <body>
 
     <h1>Study Planner</h1>
+    <div class="dashboard">
+
+    <div class="card">
+        <h3>Total Tasks</h3>
+        <p>{{ total_tasks }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Pending</h3>
+        <p>{{ pending_count }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Completed</h3>
+        <p>{{ completed_count }}</p>
+    </div>
+
+</div>
+
+<form method="GET">
+    <input
+    type="text"
+    name="search"
+    placeholder="🔍 Search tasks..."
+    value="{{ request.args.get('search', '') }}">
+
+    <button type="submit">Search</button>
+</form>
+
+<br>
 
     <form method="POST">
         <label>Subject</label>
@@ -40,23 +70,39 @@
 
     <hr>
 
-    <h2>Pending Tasks</h2>
+    <h2>📋 Pending Tasks</h2>
 
     <ul>
     {% for t in tasks %}
 <li>
-    <strong>{{ t[1] }}</strong> -
-    {{ t[2] }}
-    ({{ t[3] }})
+    <strong>📘 Subject:</strong> {{ t[1] }} <br>
+    <strong>📝 Task:</strong> {{ t[2] }} <br>
+    <strong>📅 Deadline:</strong> {{ t[3] }} <br><br>
+
+    <a href="/edit/{{ t[0] }}" class="edit-btn">✏️ Edit</a>
+
+    <a href="/complete/{{ t[0] }}" class="complete-btn">✅ Complete</a>
+
+<a href="/delete/{{ t[0] }}" class="delete-btn">🗑 Delete</a>
 </li>
 {% endfor %}
 </ul>
 
-    <h2>Completed Tasks</h2>
+    <h2>✅ Completed Tasks</h2>
 
-    <ul>
-        <li>Chemistry Notes</li>
-    </ul>
+<ul>
+{% for t in completed_tasks %}
+<li>
+    <strong>📘 Subject:</strong> {{ t[1] }} <br>
+    <strong>📝 Task:</strong> {{ t[2] }} <br>
+    <strong>📅 Deadline:</strong> {{ t[3] }} <br><br>
 
+    <a href="/delete/{{ t[0] }}" class="delete-btn">🗑 Delete</a>
+</li>
+{% endfor %}
+</ul>
+<footer>
+    © 2026 Study Planner | Built with ❤️ using Flask & SQLite
+</footer>
 </body>
 </html>

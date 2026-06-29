@@ -1,41 +1,77 @@
-from flask import Flask, render_template, request
-import sqlite3
+from flask import Flask, render_template, request, redirect
+
+from database.db_helper import (
+    add_task,
+    get_pending_tasks,
+    complete_task,
+    get_completed_tasks,
+    delete_task,
+    search_tasks,
+    get_task,
+    update_task
+)
 
 app = Flask(__name__)
 
-print("THIS IS MY APP.PY")
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    print("Request Method:", request.method)
 
     if request.method == 'POST':
         subject = request.form['subject']
         task = request.form['task']
         deadline = request.form['deadline']
 
-        connection = sqlite3.connect("study_planner.db")
-        cursor = connection.cursor()
+        add_task(subject, task, deadline)
 
-        cursor.execute("""
-        INSERT INTO tasks (subject, task, deadline)
-        VALUES (?, ?, ?)
-        """, (subject, task, deadline))
+    search = request.args.get("search")
 
-        connection.commit()
-        connection.close()
+    if search:
+        tasks = search_tasks(search)
+    else:
+        tasks = get_pending_tasks()
+    completed_tasks = get_completed_tasks()
 
-    connection = sqlite3.connect("study_planner.db")
-    cursor = connection.cursor()
+    return render_template(
+        "index.html",
+        tasks=tasks,
+        completed_tasks=completed_tasks,
+        total_tasks=len(tasks) + len(completed_tasks),
+        pending_count=len(tasks),
+        completed_count=len(completed_tasks)
+    )
 
-    cursor.execute("SELECT * FROM tasks WHERE completed = 0")
 
-    tasks = cursor.fetchall()
-    print(tasks)
+@app.route('/complete/<int:task_id>')
+def complete(task_id):
 
-    connection.close()
+    complete_task(task_id)
 
-    return render_template("index.html", tasks=tasks)
+    return redirect('/')
+
+@app.route('/delete/<int:task_id>')
+def delete(task_id):
+
+    delete_task(task_id)
+
+    return redirect('/')
+
+@app.route('/edit/<int:task_id>', methods=['GET', 'POST'])
+def edit(task_id):
+
+    if request.method == 'POST':
+        subject = request.form['subject']
+        task = request.form['task']
+        deadline = request.form['deadline']
+
+        update_task(task_id, subject, task, deadline)
+
+        return redirect('/')
+
+    task = get_task(task_id)
+
+    return render_template("edit.html", task=task)
 
 if __name__ == '__main__':
     app.run(debug=True)
+
