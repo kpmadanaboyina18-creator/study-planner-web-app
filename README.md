@@ -1,19 +1,31 @@
-# Study Planner Web App
+# 📚 Study Planner
 
-A simple web application that helps students manage study tasks and deadlines.
+A simple Study Planner web application built using **Flask** and **SQLite** to help students manage their study tasks.
 
-## Planned Features
+## 🚀 Live Demo
 
-- Add tasks
-- View tasks
-- Complete tasks
-- Delete tasks
-- Deadline tracking
+https://study-planner-web-app-x7ms.onrender.com
 
-## Tech Stack
+## ✨ Features
 
+- Add Tasks
+- Search Tasks
+- Edit Tasks
+- Complete Tasks
+- Delete Tasks
+- Dashboard (Total, Pending, Completed)
+
+## 🛠 Technologies Used
+
+- Python
+- Flask
+- SQLite
 - HTML
 - CSS
-- JavaScript
-- Python Flask
-- SQLite
+- Git
+- GitHub
+- Render
+
+## 👨‍💻 Developer
+
+Designed & Developed with ❤️ by **Krishnaphani**
